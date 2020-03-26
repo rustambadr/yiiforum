@@ -1,0 +1,697 @@
+body .pagination {
+  margin-top: 25px;
+}
+
+body header {
+  height: 200px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+body header .container {
+  padding: 25px 0;
+  display: flex;
+}
+
+body header .container .logo {
+  margin: auto;
+}
+
+body section#app {
+  padding: 25px 0;
+  min-height: calc(100vh - 250px);
+}
+
+body section#app .container {
+  display: flex;
+}
+
+body section#app .container .dialog-box .inbox_msg {
+  border: 1px solid #ddd;
+  clear: both;
+  overflow: hidden;
+}
+
+body section#app .container .dialog-box .head {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px;
+  border-bottom: 1px solid #ddd;
+}
+
+body section#app .container .dialog-box .head .name {
+  margin: auto 0;
+}
+
+body section#app .container .dialog-box .head .name p {
+  margin-bottom: 0;
+  font-weight: bold;
+}
+
+body section#app .container .dialog-box .top_spac {
+  margin: 20px 0 0;
+}
+
+body section#app .container .dialog-box .recent_heading {
+  float: left;
+  width: 40%;
+}
+
+body section#app .container .dialog-box .srch_bar {
+  display: inline-block;
+  text-align: right;
+  width: 60%;
+}
+
+body section#app .container .dialog-box .headind_srch {
+  padding: 10px 29px 10px 20px;
+  overflow: hidden;
+  border-bottom: 1px solid #c4c4c4;
+}
+
+body section#app .container .dialog-box .recent_heading h4 {
+  color: #0465ac;
+  font-size: 16px;
+  margin: auto;
+  line-height: 29px;
+}
+
+body section#app .container .dialog-box .srch_bar input {
+  outline: none;
+  border: 1px solid #cdcdcd;
+  border-width: 0 0 1px 0;
+  width: 80%;
+  padding: 2px 0 4px 6px;
+  background: none;
+}
+
+body section#app .container .dialog-box .srch_bar .input-group-addon button {
+  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+  border: medium none;
+  padding: 0;
+  color: #707070;
+  font-size: 18px;
+}
+
+body section#app .container .dialog-box .srch_bar .input-group-addon {
+  margin: 0 0 0 -27px;
+}
+
+body section#app .container .dialog-box .chat_ib h5 {
+  font-size: 15px;
+  color: #464646;
+  margin: 0 0 8px 0;
+}
+
+body section#app .container .dialog-box .chat_ib h5 span {
+  font-size: 13px;
+  float: right;
+}
+
+body section#app .container .dialog-box .chat_ib p {
+  font-size: 12px;
+  color: #989898;
+  margin: auto;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+body section#app .container .dialog-box .chat_img {
+  float: left;
+  width: 11%;
+}
+
+body section#app .container .dialog-box .chat_img img {
+  width: 100%;
+}
+
+body section#app .container .dialog-box .chat_ib {
+  float: left;
+  padding: 0 0 0 15px;
+  width: 88%;
+}
+
+body section#app .container .dialog-box .chat_people {
+  overflow: hidden;
+  clear: both;
+}
+
+body section#app .container .dialog-box .chat_list {
+  border-bottom: 1px solid #ddd;
+  margin: 0;
+  padding: 18px 16px 10px;
+}
+
+body section#app .container .dialog-box .inbox_chat {
+  height: 550px;
+  overflow-y: scroll;
+}
+
+body section#app .container .dialog-box .active_chat {
+  background: #e8f6ff;
+}
+
+body section#app .container .dialog-box .incoming_msg_img {
+  display: inline-block;
+  background-position: center;
+  background-size: cover;
+  border-radius: 25px;
+  height: 50px;
+  width: 50px;
+}
+
+body section#app .container .dialog-box .received_msg {
+  display: inline-block;
+  padding: 0 0 0 10px;
+  vertical-align: top;
+  width: 92%;
+}
+
+body section#app .container .dialog-box .received_withd_msg p.text {
+  background: #ebebeb none repeat scroll 0 0;
+  border-radius: 0 15px 15px 15px;
+  color: #646464;
+  font-size: 14px;
+  margin: 0;
+  padding: 5px 10px 5px 12px;
+  width: 100%;
+}
+
+body section#app .container .dialog-box .time_date {
+  color: #747474;
+  display: block;
+  font-size: 12px;
+  margin: 8px 0 0;
+}
+
+body section#app .container .dialog-box .received_withd_msg {
+  width: 57%;
+}
+
+body section#app .container .dialog-box .mesgs {
+  padding: 15px;
+}
+
+body section#app .container .dialog-box .mesgs p.name {
+  margin-bottom: 0;
+  color: #747474;
+  display: block;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+body section#app .container .dialog-box .sent_msg p.text {
+  background: #0465ac;
+  border-radius: 12px 0px 15px 12px;
+  font-size: 14px;
+  margin: 0;
+  color: #fff;
+  padding: 5px 10px 5px 12px;
+  width: 100%;
+}
+
+body section#app .container .dialog-box .sent_msg .name {
+  text-align: right;
+}
+
+body section#app .container .dialog-box .outgoing_msg, body section#app .container .dialog-box .incoming_msg {
+  overflow: hidden;
+  margin: 10px 0 10px;
+}
+
+body section#app .container .dialog-box .sent_msg {
+  float: right;
+  width: 46%;
+}
+
+body section#app .container .dialog-box .input_msg_write input {
+  background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+  border: medium none;
+  color: #4c4c4c;
+  font-size: 15px;
+  min-height: 48px;
+  width: 100%;
+  outline: none;
+}
+
+body section#app .container .dialog-box .type_msg {
+  border-top: 1px solid #c4c4c4;
+  position: relative;
+}
+
+body section#app .container .dialog-box .msg_send_btn {
+  background: #05728f none repeat scroll 0 0;
+  border: none;
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  font-size: 15px;
+  height: 33px;
+  position: absolute;
+  right: 0;
+  top: 11px;
+  width: 33px;
+}
+
+body section#app .container .dialog-box .messaging {
+  padding: 0 0 50px 0;
+}
+
+body section#app .container .dialog-box .msg_history {
+  height: 516px;
+  overflow-y: auto;
+}
+
+body section#app .container .dialog-box .msg_history .load-more {
+  text-align: center;
+}
+
+body section#app .container .more {
+  margin-top: 15px;
+  float: right;
+  text-decoration: underline;
+  color: black;
+}
+
+body section#app .container .left-menu {
+  max-width: 325px;
+  width: 100%;
+}
+
+body section#app .container .left-menu .menu {
+  border-right: solid 1px rgba(158, 158, 158, 0.5);
+  padding-right: 15px;
+}
+
+body section#app .container .left-menu .menu a {
+  display: block;
+  text-align: left;
+  margin-bottom: 5px;
+}
+
+body section#app .container .left-menu .menu a i {
+  width: 30px;
+}
+
+body section#app .container .left-menu .menu a.btn-default:hover {
+  background-color: rgba(158, 158, 158, 0.5);
+}
+
+body section#app .container .left-menu .menu .profile div, body section#app .container .left-menu .menu .message div {
+  display: inline;
+}
+
+body section#app .container .left-menu .menu .profile div span:nth-child(2), body section#app .container .left-menu .menu .message div span:nth-child(2) {
+  float: right;
+}
+
+body section#app .container .left-menu .onlineblock .title {
+  font-weight: bold;
+}
+
+body section#app .container .left-menu .onlineblock .stats {
+  display: flex;
+  justify-content: space-between;
+}
+
+body section#app .container .left-menu .onlineblock .stats p {
+  margin-bottom: 0;
+}
+
+body section#app .container .left-menu .onlineblock .stats .num {
+  font-weight: bold;
+  font-size: 14px;
+  margin: auto 0;
+}
+
+body section#app .container .content {
+  padding-left: 15px;
+  width: 100%;
+}
+
+body section#app .container .content .top-category .category {
+  border: 1px solid black;
+  padding: 5px;
+}
+
+body section#app .container .content .top-category .category {
+  margin: auto;
+  border-radius: 3px;
+}
+
+body section#app .container .content .top-category .category .image {
+  height: 200px;
+  display: flex;
+  overflow: hidden;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+body section#app .container .content .top-category .category p {
+  color: black;
+}
+
+body section#app .container .content .bot-category .category {
+  margin: auto;
+  border-radius: 3px;
+}
+
+body section#app .container .content .bot-category .category .image {
+  height: 120px;
+  display: flex;
+  overflow: hidden;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+body section#app .container .content .bot-category .category p {
+  color: black;
+}
+
+body section#app .container .content .last-thread {
+  margin-top: 55px;
+}
+
+body section#app .container .content .last-thread .thread {
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  padding: 10px;
+  border-radius: 10px;
+  height: 58px;
+  display: flex;
+}
+
+body section#app .container .content .last-thread .thread a {
+  width: 100%;
+  margin: auto 0;
+  color: inherit;
+  text-decoration: inherit;
+  display: flex;
+  justify-content: space-between;
+}
+
+body section#app .container .content .last-thread .thread a .title {
+  display: flex;
+  width: 340px;
+}
+
+body section#app .container .content .last-thread .thread a .title i {
+  font-size: 25px;
+  margin: auto 0;
+}
+
+body section#app .container .content .last-thread .thread a .title p {
+  margin: auto 0;
+  margin-left: 15px;
+  max-width: 400px;
+  overflow: hidden;
+  white-space: nowrap;
+  word-wrap: normal;
+  text-overflow: ellipsis;
+}
+
+body section#app .container .content .last-thread .thread a .stats {
+  margin-left: 15px;
+  margin-right: auto;
+  width: 60px;
+  display: flex;
+}
+
+body section#app .container .content .last-thread .thread a .stats p {
+  margin: auto;
+}
+
+body section#app .container .content .last-thread .thread a .comment {
+  display: flex;
+  flex-direction: column;
+}
+
+body section#app .container .content .last-thread .thread a .comment p {
+  margin: auto;
+  max-width: 300px;
+  overflow: hidden;
+  white-space: nowrap;
+  word-wrap: normal;
+  text-overflow: ellipsis;
+  margin-right: 0;
+  font-size: 0.8rem;
+}
+
+body section#app .container .content .last-thread .thread.moder {
+  background-color: rgba(255, 0, 0, 0.1);
+}
+
+body section#app .container .content .last-thread .thread:hover {
+  background-color: rgba(158, 158, 158, 0.5);
+}
+
+body section#app .container .content .categoryImage img {
+  width: 100%;
+  height: auto;
+}
+
+body section#app .container .content .category-list .last-thread {
+  margin-top: 0px;
+}
+
+body section#app .container .content .thread-content {
+  display: flex;
+}
+
+body section#app .container .content .thread-content .left {
+  padding: 10px;
+  width: 100px;
+}
+
+body section#app .container .content .thread-content .left .image {
+  width: 64px;
+  margin: auto;
+}
+
+body section#app .container .content .thread-content .left .image img {
+  width: 100%;
+  height: auto;
+}
+
+body section#app .container .content .thread-content .left .name {
+  display: block;
+  margin: 0;
+  text-align: center;
+  font-size: 14px;
+  overflow: hidden;
+  white-space: nowrap;
+  word-wrap: normal;
+  text-overflow: ellipsis;
+}
+
+body section#app .container .content .thread-content .right {
+  width: 100%;
+  padding-top: 10px;
+}
+
+body section#app .container .content .thread-content .right .top {
+  display: flex;
+  justify-content: space-between;
+}
+
+body section#app .container .content .thread-content .right .top .title {
+  margin: 0;
+}
+
+body section#app .container .content .thread-content .right .top .date {
+  margin: 0;
+}
+
+body section#app .container .content .main .last-thread .thread .title {
+  width: 400px;
+}
+
+body section#app .container .content .main .last-thread .thread .stats {
+  width: 135px;
+}
+
+body section#app .container .content .category .last-thread, body section#app .container .content .thread-list .last-thread {
+  margin-top: 0;
+}
+
+body section#app .container .content .category .last-thread .thread .title, body section#app .container .content .thread-list .last-thread .thread .title {
+  width: 400px;
+}
+
+body section#app .container .content .category .last-thread .thread .stats, body section#app .container .content .thread-list .last-thread .thread .stats {
+  width: 135px;
+}
+
+body section#app .container .content .thread-list .last-thread {
+  margin-top: 0;
+}
+
+body section#app .container .content .dialog-list .last-dialog .dialog {
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  padding: 10px;
+  border-radius: 10px;
+  height: 58px;
+  display: flex;
+}
+
+body section#app .container .content .dialog-list .last-dialog .dialog a {
+  width: 100%;
+  margin: auto 0;
+  color: inherit;
+  text-decoration: inherit;
+  display: flex;
+  justify-content: space-between;
+}
+
+body section#app .container .content .dialog-list .last-dialog .dialog a .title {
+  display: flex;
+  width: 340px;
+}
+
+body section#app .container .content .dialog-list .last-dialog .dialog a .title i {
+  font-size: 25px;
+  margin: auto 0;
+}
+
+body section#app .container .content .dialog-list .last-dialog .dialog a .title p {
+  margin: auto 0;
+  margin-left: 15px;
+  max-width: 400px;
+  overflow: hidden;
+  white-space: nowrap;
+  word-wrap: normal;
+  text-overflow: ellipsis;
+}
+
+body section#app .container .content .dialog-list .last-dialog .dialog a .stats {
+  margin-left: 15px;
+  margin-right: auto;
+  width: 160px;
+  display: flex;
+}
+
+body section#app .container .content .dialog-list .last-dialog .dialog a .stats p {
+  margin: auto;
+}
+
+body section#app .container .content .dialog-list .last-dialog .dialog a .comment {
+  display: flex;
+  flex-direction: column;
+}
+
+body section#app .container .content .dialog-list .last-dialog .dialog a .comment p {
+  margin: auto;
+  max-width: 300px;
+  overflow: hidden;
+  white-space: nowrap;
+  word-wrap: normal;
+  text-overflow: ellipsis;
+  margin-right: 0;
+  font-size: 0.8rem;
+}
+
+body section#app .container .content .dialog-list .last-dialog .dialog.unread {
+  background-color: rgba(255, 0, 0, 0.1);
+}
+
+body section#app .container .content .dialog-list .last-dialog .dialog:hover {
+  background-color: rgba(158, 158, 158, 0.5);
+}
+
+body section#app .container .content .thread-comment {
+  margin-bottom: 10px;
+}
+
+body section#app .container .content .thread-comment.good {
+  background-color: rgba(0, 255, 0, 0.1);
+}
+
+body section#app .container .content .thread-comment.bad {
+  background-color: rgba(255, 0, 0, 0.1);
+}
+
+body section#app .container .content .thread-comment.admin {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+body section#app .container .content .thread-comment.default {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body section#app .container .content .add-comment, body section#app .container .content .thread-comment {
+  display: flex;
+}
+
+body section#app .container .content .add-comment .left, body section#app .container .content .thread-comment .left {
+  padding: 10px;
+  width: 100px;
+}
+
+body section#app .container .content .add-comment .left .image, body section#app .container .content .thread-comment .left .image {
+  width: 64px;
+  margin: auto;
+}
+
+body section#app .container .content .add-comment .left .image img, body section#app .container .content .thread-comment .left .image img {
+  width: 100%;
+  height: auto;
+}
+
+body section#app .container .content .add-comment .left .name, body section#app .container .content .thread-comment .left .name {
+  display: block;
+  margin: 0;
+  text-align: center;
+  font-size: 14px;
+  overflow: hidden;
+  white-space: nowrap;
+  word-wrap: normal;
+  text-overflow: ellipsis;
+}
+
+body section#app .container .content .add-comment .right, body section#app .container .content .thread-comment .right {
+  width: 100%;
+  padding-top: 10px;
+}
+
+body section#app .container .content .add-comment .right .top, body section#app .container .content .thread-comment .right .top {
+  display: flex;
+  justify-content: space-between;
+}
+
+body section#app .container .content .add-comment .right .top .title, body section#app .container .content .thread-comment .right .top .title {
+  margin: 0;
+}
+
+body section#app .container .content .add-comment .right .top .date, body section#app .container .content .thread-comment .right .top .date {
+  margin: 0;
+}
+
+body section#app .container .content .add-comment .right .top .award, body section#app .container .content .thread-comment .right .top .award {
+  margin-left: auto;
+  margin-right: 10px;
+  color: #FF5722;
+}
+
+body section#app .container .content .add-comment .right .top .edit, body section#app .container .content .thread-comment .right .top .edit {
+  margin-right: 10px;
+}
+
+body section#app .p-field img {
+  max-width: 100%;
+}
+
+body footer .container {
+  padding: 25px 0;
+  border-top: solid 1px rgba(158, 158, 158, 0.5);
+  display: flex;
+  justify-content: space-between;
+}
+
+body footer .container p {
+  margin-bottom: 0;
+  height: 25px;
+}

@@ -1,0 +1,15 @@
+@media (max-width: 992px) {
+  body section#app .container.main-container {
+    display: block;
+  }
+  body section#app .container .left-menu {
+    max-width: unset;
+    margin-bottom: 30px;
+  }
+}
+
+@media (max-width: 576px) {
+  body section#app .container .content .add-comment .left {
+    display: none;
+  }
+}
