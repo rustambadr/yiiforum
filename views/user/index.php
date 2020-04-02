@@ -13,16 +13,15 @@
   <?php if ($allowEdit): ?>
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
       <?= $form->errorSummary($user); ?>
-      <?= $form->field($user, 'name')->textInput() ?>
-
+      <?php if (Yii::$app->user->identity->isAdmin): ?>
+        <?= $form->field($user, 'name')->textInput() ?>
+      <?php endif; ?>
+      <?= $form->field($user, 'password')->textInput()->label('Поставить новый пароль') ?>
       <?= $form->field($user, 'about')->widget(Widget::className(), [
           'settings' => [
             'lang' => 'ru',
             'minHeight' => 200,
-            'plugins' => [
-                'fontcolor',
-                'fullscreen',
-            ],
+            'plugins' => Yii::$app->functions->editorPlugins()
           ],
       ]) ?>
 
@@ -31,11 +30,13 @@
 
       <?php if (Yii::$app->user->identity->isAdmin): ?>
         <?= $form->field($user, 'role')->dropDownList([
+            Users::ROLE_BANNED => 'Забаненный',
             Users::ROLE_MEMBER => 'Пользователь',
             Users::ROLE_SELLER => 'Продавец',
             Users::ROLE_VIP => 'Vip',
             Users::ROLE_MODERATOR => 'Модератор',
-            Users::ROLE_ADMIN => 'Админ'
+            Users::ROLE_ADMIN => 'Администратор',
+            Users::ROLE_GARANT => 'Гарант',
         ],[
             'prompt' => 'Выберите роль'
         ]) ?>
@@ -47,16 +48,18 @@
     <?php ActiveForm::end(); ?>
     <hr>
   <?php endif; ?>
-  <div class="info">
-    <div class="name">
-      <label>Имя: </label><p style="color: <?= $user->getColor() ?>"><?= $user->name ?></p>
-      <label>Обо мне: </label><?= $user->about ?>
+  <?php if (Yii::$app->user->id != $user->id): ?>
+    <div class="info">
+      <div class="name">
+        <label>Имя: </label><p style="color: <?= $user->getColor() ?>"><?= $user->name ?></p>
+        <label>Обо мне: </label><?= $user->about ?>
+      </div>
+      <div class="image">
+        <img src="<?= $user->getImage() ?>" class="img-thumbnail mb-2" style="width: 200px;">
+      </div>
+      <div class="form-group">
+        <a href="<?= Url::to(['dialog/startdialog', 'id' => $user->id]) ?>" class="btn btn-primary">Начать диалог</a>
+      </div>
     </div>
-    <div class="image">
-      <img src="<?= $user->getImage() ?>" class="img-thumbnail mb-2" style="width: 200px;">
-    </div>
-    <div class="form-group">
-      <a href="<?= Url::to(['dialog/startdialog', 'id' => $user->id]) ?>" class="btn btn-primary">Начать диалог</a>
-    </div>
-  </div>
+  <?php endif; ?>
 </div>

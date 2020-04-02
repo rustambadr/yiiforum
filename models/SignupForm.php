@@ -5,6 +5,7 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use app\models\Users;
+use yii\web\UploadedFile;
 
 /**
  * LoginForm is the model behind the login form.
@@ -18,13 +19,19 @@ class SignupForm extends Model
     public $email;
     public $password;
     public $_user = false;
+    public $file;
+
+    public $captcha;
 
     public function rules()
     {
         return [
-            [['email', 'password', 'name'], 'required'],
+            [['email', 'password', 'name', 'captcha'], 'required'],
             ['email', 'validateEmail'],
+            ['name', 'validateLogin'],
             ['email', 'email'],
+            ['captcha', 'captcha'],
+            [['file'], 'file', 'skipOnEmpty' => true],
         ];
     }
 
@@ -33,7 +40,9 @@ class SignupForm extends Model
         return [
             'email' => 'Email',
             'password' => 'Пароль',
-            'name' => 'Имя'
+            'name' => 'Логин',
+            'file' => 'Аватар',
+            'captcha' => 'Код'
         ];
     }
 
@@ -46,14 +55,33 @@ class SignupForm extends Model
             }
         }
     }
+    public function validateLogin($attribute, $params)
+    {
+        if (!$this->hasErrors()) {
+            $user = Users::findByLogin($this->name);
+            if ($user) {
+                $this->addError($attribute, 'Пользователь с данным Логином уже существует.');
+            }
+        }
+    }
 
     public function signup()
     {
+        $this->file = UploadedFile::getInstance($this, 'file');
         if ($this->validate()) {
           $user = new Users;
+
+          if ($this->file) {
+            $name = 'images/upload/' . md5(md5(time()).$this->file->baseName) . '.' . $this->file->extension;
+            $this->file->saveAs($name);
+            $user->image = $name;
+          }
+          else {
+            $user->image = '';
+          }
+
           $user->name = $this->name;
           $user->email = $this->email;
-          $user->image = '';
           $user->about = '';
           $user->unread_message = '';
           $user->password = md5($this->password);

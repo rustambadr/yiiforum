@@ -3,7 +3,7 @@ $('#dialog').ready(function(){
 });
 $('#dialog').on('beforeSubmit', function(event){
   $.post('/dialog/newmessage', $(this).serialize());
-  $(this).find('.write_msg').val('');
+  $('#dialog textarea').redactor('code.set', '');
   $(this).find('.msg_history').scrollTop(9999999);
   return false;
 });
@@ -87,10 +87,21 @@ $(function(){
           updateMessage();
         }, 500);
         if( response.length > 0 ) {
-          $('.ms-block').eq(-1).after(response);
+          if( $('.ms-block').length == 0 )
+            $('.msg_history').prepend(response);
+          else
+            $('.ms-block').eq(-1).after(response);
           $('.dialog-box').find('.msg_history').scrollTop(9999999);
         }
       });
     }
   }
+});
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+});
+$(function() {
+  $("img.lazy").each(function(){
+    $(this).attr('src', $(this).attr('data-original'));
+  });
 });

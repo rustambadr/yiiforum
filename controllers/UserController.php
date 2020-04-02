@@ -16,6 +16,13 @@ use yii\db\Query;
 
 class UserController extends Controller
 {
+  public function beforeAction($action)
+  {
+    if ( !Yii::$app->user->isGuest && Yii::$app->user->identity->role == Users::ROLE_BANNED )
+      throw new \yii\web\NotFoundHttpException("Доступ закрыт");
+    return parent::beforeAction($action);
+  }
+  
     public function actionIndex($id)
     {
       if( Yii::$app->user->isGuest )
@@ -34,6 +41,7 @@ class UserController extends Controller
         return Yii::$app->response->redirect(Url::to(['user/index', 'id' => $user->id]));
       }
 
+      $user->password = "";
       return $this->render('index', [
         'user' => $user,
         'allowEdit' => $allowEdit

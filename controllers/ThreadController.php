@@ -26,6 +26,13 @@ class ThreadController extends Controller
         ];
     }
 
+    public function beforeAction($action)
+    {
+      if ( !Yii::$app->user->isGuest && Yii::$app->user->identity->role == Users::ROLE_BANNED )
+        throw new \yii\web\NotFoundHttpException("Доступ закрыт");
+      return parent::beforeAction($action);
+    }
+
     public function actionIndex($alias)
     {
       $thread = Thread::findByAlias($alias);
@@ -45,9 +52,9 @@ class ThreadController extends Controller
         if( Yii::$app->user->identity->isAdmin || array_search(Yii::$app->user->id, $ids) !== false )
           $allowComment = true;
       }
-      if( $thread->type == Thread::TYPE_PRIVATE ) {
-        $ids = explode(',', $thread->allow_view_ids);
-        if( !Yii::$app->user->identity->isAdmin && array_search(Yii::$app->user->id, $ids) === false )
+      if( $thread->type == Thread::TYPE_PRIVATE && !$thread->getAllowview() ) {
+        // $ids = explode(',', $thread->allow_view_ids);
+        // if( !Yii::$app->user->identity->isAdmin && array_search(Yii::$app->user->id, $ids) === false )
           throw new \yii\web\NotFoundHttpException("Тема недоступна");
       }
 
@@ -58,16 +65,23 @@ class ThreadController extends Controller
       $comment->id_thread = $thread->id;
 
       if ($comment->load(Yii::$app->request->post()) && Yii::$app->user->isGuest == false && $comment->saveModel()) {
+        $thread->date_update = date('Y-m-d H:i:s');
+        $thread->save( false );
+
         Yii::$app->session->setFlash('success', "Сообщение опубликовано");
         return Yii::$app->response->redirect(Url::to(['thread/index', 'alias' => $thread->alias]));
       }
 
       // $comments = Comment::find()->where(['id_thread' => $thread->id])->orderBy(['type' => SORT_ASC, 'date_create' => SORT_ASC])->all();
-      $comments = Comment::find()->where(['id_thread' => $thread->id])->orderBy(['date_create' => SORT_ASC])->all();
+      $comments = Comment::find()->where(['id_thread' => $thread->id])->orderBy(['date_create' => SORT_ASC]);
+      $countQuery = clone $comments;
+      $pages = new Pagination(['totalCount' => $countQuery->count(), 'pageSize' => 16]);
+      $comments = $comments->offset($pages->offset)->limit($pages->limit)->all();
 
       return $this->render('thread', [
         'thread' => $thread,
         'comment' => $comment,
+        'pages' => $pages,
         'comments' => $comments,
         'category' => $category,
         'allowComment' => $allowComment
@@ -104,6 +118,8 @@ class ThreadController extends Controller
         $thread->enable = 1;
         $thread->id_owner = Yii::$app->user->id;
         $thread->role_view = Users::ROLE_MODERATOR;
+        $thread->color = "";
+        $thread->color_text = "";
       }
       else {
         if ( (Yii::$app->user->isGuest == false && Yii::$app->user->identity->isAdmin) == false && (Yii::$app->user->id == $thread->id_owner && $id != 0) == false )

@@ -11,6 +11,7 @@ use app\models\LoginForm;
 use app\models\Thread;
 use app\models\SignupForm;
 use app\models\ContactForm;
+use yii\captcha\Captcha;
 
 use app\models\Category;
 use yii\data\Pagination;
@@ -31,6 +32,13 @@ class SiteController extends Controller
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
         ];
+    }
+
+    public function beforeAction($action)
+    {
+      if ( !Yii::$app->user->isGuest && Yii::$app->user->identity->role == Users::ROLE_BANNED )
+        throw new \yii\web\NotFoundHttpException("Доступ закрыт");
+      return parent::beforeAction($action);
     }
 
     public function actionIndex()
@@ -64,10 +72,10 @@ class SiteController extends Controller
         if( $user_online_min !== false && $user_online_max !== false
         && $guest_online_min !== false && $guest_online_max !== false ) {
           Yii::$app->functions->writeToConfig([
-            'user_online_min' => $user_online_min,
-            'user_online_max' => $user_online_max,
-            'guest_online_min' => $guest_online_min,
-            'guest_online_max' => $guest_online_max,
+            'user_online_min' => min($user_online_min, $user_online_max),
+            'user_online_max' => max($user_online_min, $user_online_max),
+            'guest_online_min' => min($guest_online_min, $guest_online_max),
+            'guest_online_max' => max($guest_online_min, $guest_online_max),
           ]);
         }
       }
@@ -81,7 +89,8 @@ class SiteController extends Controller
       if ( Yii::$app->user->isGuest )
         throw new \yii\web\NotFoundHttpException("Доступ закрыт");
 
-      $threads = Thread::find()->where(['type' => Thread::TYPE_PRIVATE])->orderBy(['date_create' => SORT_DESC])->all();
+      $myID = Yii::$app->user->id;
+      $threads = Thread::find()->where(['type' => Thread::TYPE_PRIVATE])->orWhere("`id_category` = '7' AND `id_owner` = '$myID'")->orderBy(['date_create' => SORT_DESC])->all();
 
       return $this->render('list', [
         'threads' => $threads

@@ -3,6 +3,7 @@
   use yii\bootstrap4\ActiveForm;
   use app\models\Users;
   use yii\helpers\Html;
+  use vova07\imperavi\Widget;
 
   $this->title = $dialog->getTitle();
   $this->params['breadcrumbs'][] = 'Диалог - ' . $this->title;
@@ -43,8 +44,20 @@
             'options' => ['enctype' => 'multipart/form-data']
           ]); ?>
             <input type="hidden" name="id_dialog" value="<?= $dialog->id ?>">
-            <input type="text" class="write_msg" name="message" placeholder="Сообщение..." autocomplete="off" required>
-            <button class="msg_send_btn" type="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+
+            <?php echo \vova07\imperavi\Widget::widget([
+              'name' => 'message',
+              'settings' => [
+                  'lang' => 'ru',
+                  'minHeight' => 200,
+                  'imageUpload' => Url::to(['/thread/image-upload']),
+                  'plugins' => array_merge(Yii::$app->functions->editorPlugins(), [
+                    'imagemanager',
+                    ])
+              ],
+          ]); ?>
+
+            <button class="btn btn-primary" type="submit">Отправить <i class="fa fa-paper-plane" aria-hidden="true"></i></button>
           <?php ActiveForm::end(); ?>
     		</div>
     	  </div>

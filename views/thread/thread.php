@@ -6,15 +6,16 @@
   use yii\helpers\Html;
   use yii\helpers\Url;
   use app\models\Users;
+  use yii\bootstrap4\LinkPager;
 
   $this->title = $thread->title;
   $this->params['breadcrumbs'][] = ['label' => $category->title, 'url' => Url::to(['category/index', 'alias' => $category->alias])];
   $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="thread">
-  <?php if ((Yii::$app->user->isGuest == false && Yii::$app->user->identity->isAdmin) || (Yii::$app->user->isGuest == false && Yii::$app->user->id == $thread->id_owner)): ?>
+  <?php if (Yii::$app->user->isGuest == false && Yii::$app->user->identity->isAdmin): ?>
     <div class="form-group">
-      <a href="<?= Url::to(['thread/edit', 'id' => $thread->id]) ?>" class="btn btn-primary">Редиктировать тему</a>
+      <a href="<?= Url::to(['thread/edit', 'id' => $thread->id]) ?>" class="btn btn-primary">Редактировать тему</a>
       <?php if (Yii::$app->user->identity->isAdmin): ?>
         <a href="<?= Url::to(['thread/delete', 'id' => $thread->id]) ?>" class="btn btn-danger">Удалить тему</a>
       <?php endif; ?>
@@ -58,7 +59,7 @@
         <div class="top">
           <p class="date"><i><?= Yii::$app->functions->formatDate($_comment->date_create) ?></i></p>
           <?php if ($_comment->type == 2): ?>
-            <p class="award"><i class="fas fa-award"></i></p>
+            <p class="award"><i class="fas fa-award" data-toggle="tooltip" data-placement="top" title="Верифицирован"></i></p>
           <?php endif; ?>
           <?php if (Yii::$app->user->isGuest == false && Yii::$app->user->identity->isAdmin): ?>
             <a href="<?= Url::to(['comment/edit/'.$_comment->id]) ?>" class="edit"><i class="fas fa-edit"></i></a>
@@ -70,6 +71,10 @@
       </div>
     </div>
   <?php endforeach; ?>
+
+  <?= LinkPager::widget([
+      'pagination' => $pages,
+  ]); ?>
 
   <?php if (Yii::$app->user->isGuest == false && $thread->enable != 2): ?>
     <hr>
@@ -87,11 +92,9 @@
               'lang' => 'ru',
               'minHeight' => 200,
               'imageUpload' => Url::to(['/thread/image-upload']),
-              'plugins' => [
-                  'fontcolor',
-                  'fullscreen',
-                  'imagemanager',
-              ],
+              'plugins' => array_merge(Yii::$app->functions->editorPlugins(), [
+                'imagemanager',
+                ])
             ],
         ])->label(false) ?>
           <?php if (Yii::$app->user->identity->isAdmin): ?>
@@ -130,5 +133,15 @@
         <?php ActiveForm::end(); ?>
       </div>
     </div>
+  <?php else: ?>
+    <?php if ($thread->enable == 2): ?>
+      <div class="not-login">
+        <p>Тема закрыта</p>
+      </div>
+    <?php else: ?>
+      <div class="not-login">
+        <p>Чтобы отвечать в темы необходимо <a href="<?= Url::to(['site/signup']) ?>">зарегистрироваться</a></p>
+      </div>
+    <?php endif; ?>
   <?php endif; ?>
 </div>

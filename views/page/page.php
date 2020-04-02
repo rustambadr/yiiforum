@@ -13,7 +13,7 @@
 <div class="page">
   <?php if (Yii::$app->user->isGuest == false && Yii::$app->user->identity->isAdmin): ?>
     <div class="form-group">
-      <a href="<?= Url::to(['page/edit', 'id' => $page->id]) ?>" class="btn btn-primary">Редиктировать страницу</a>
+      <a href="<?= Url::to(['page/edit', 'id' => $page->id]) ?>" class="btn btn-primary">Редактировать страницу</a>
       <a href="<?= Url::to(['page/delete', 'id' => $page->id]) ?>" class="btn btn-danger">Удалить страницу</a>
     </div>
   <?php endif; ?>

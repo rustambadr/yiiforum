@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: localhost:8888
--- Время создания: Мар 25 2020 г., 13:48
+-- Время создания: Мар 30 2020 г., 17:39
 -- Версия сервера: 5.7.21
 -- Версия PHP: 7.2.7
 
@@ -62,19 +62,6 @@ CREATE TABLE `comment` (
   `type` int(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Дамп данных таблицы `comment`
---
-
-INSERT INTO `comment` (`id`, `id_owner`, `id_thread`, `comment`, `date_create`, `type`) VALUES
-(1, 1, 1, '<p>test</p>', '2020-03-17 18:16:44', 0),
-(2, 1, 1, '<p>test</p>', '2020-03-17 18:16:44', 2),
-(4, 1, 2, '<p>Как дела ? </p>', '2020-03-17 18:35:01', 1),
-(5, 1, 2, '<p>Все отлично</p>', '2020-03-17 18:35:51', 2),
-(7, 1, 2, '<p>Test</p>', '2020-03-22 20:20:06', 3),
-(8, 2, 2, '<p><span style=\"background-color: rgb(192, 80, 77);\"><span style=\"color: rgb(255, 255, 255);\">Привет</span></span></p>', '2020-03-28 19:25:00', 3),
-(9, 1, 5, '<p>Привет</p>', '2020-03-25 13:30:14', 3);
-
 -- --------------------------------------------------------
 
 --
@@ -93,8 +80,7 @@ CREATE TABLE `dialog` (
 --
 
 INSERT INTO `dialog` (`id`, `user_ids`, `date_update`, `enable`) VALUES
-(1, '{\"u1\":1,\"u2\":\"2\"}', '2020-03-23 19:35:27', 1),
-(3, '{\"u3\":3,\"u2\":\"2\"}', '2020-03-25 12:18:51', 1);
+(1, '{\"u1\":1,\"u2\":\"2\"}', '2020-03-30 16:51:22', 1);
 
 -- --------------------------------------------------------
 
@@ -115,18 +101,8 @@ CREATE TABLE `message` (
 --
 
 INSERT INTO `message` (`id`, `id_dialog`, `id_user`, `message`, `date_create`) VALUES
-(2, 1, 1, 'Привет', '2020-03-25 12:15:54'),
-(3, 1, 1, 'Привет', '2020-03-25 12:16:45'),
-(4, 1, 2, 'Привет', '2020-03-25 12:16:54'),
-(5, 3, 3, 'Привет', '2020-03-25 12:18:56'),
-(6, 3, 3, 'Как дела?', '2020-03-25 12:22:44'),
-(7, 3, 2, 'Все хорошо', '2020-03-25 12:23:51'),
-(9, 3, 3, 'Пользователь пригласил администратора в данный чат!', '2020-03-25 12:40:26'),
-(10, 3, 1, 'Администратор покинул данный чат!', '2020-03-25 12:44:11'),
-(11, 1, 1, 'Пользователь пригласил администратора в данный чат!', '2020-03-25 12:45:24'),
-(12, 3, 3, 'Пользователь пригласил администратора в данный чат!', '2020-03-25 12:45:41'),
-(13, 3, 1, 'Работает', '2020-03-25 12:45:54'),
-(14, 3, 1, 'Администратор покинул данный чат!', '2020-03-25 12:46:09');
+(1, 1, 1, '<p>Привет</p>', '2020-03-30 16:51:29'),
+(2, 1, 2, '<p>Привет</p>', '2020-03-30 16:51:37');
 
 -- --------------------------------------------------------
 
@@ -142,13 +118,6 @@ CREATE TABLE `page` (
   `date_create` datetime NOT NULL,
   `icon` varchar(64) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Дамп данных таблицы `page`
---
-
-INSERT INTO `page` (`id`, `title`, `alias`, `content`, `date_create`, `icon`) VALUES
-(2, 'Тестовая страница', 'testovaa_stranica', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', '2020-03-18 07:26:00', 'arrows-alt');
 
 -- --------------------------------------------------------
 
@@ -180,11 +149,7 @@ CREATE TABLE `thread` (
 --
 
 INSERT INTO `thread` (`id`, `title`, `color`, `color_text`, `content`, `alias`, `id_owner`, `id_category`, `date_create`, `date_update`, `role_view`, `comment_count`, `allow_comment_ids`, `allow_view_ids`, `enable`, `type`) VALUES
-(1, 'Тестовая тема', '', '', '<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', 'test', 1, 4, '2020-03-13 10:30:00', '2020-03-13 10:30:00', 1, 2, '', '', 0, 0),
-(2, 'Тестовая тема 2Тестовая тема 2Тестовая тема 2Тестовая тема 2', '#7f6000', '#ffffff', '<p><span style=\"background-color: rgb(99, 36, 35);\">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation</span> ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>', 'test2', 1, 4, '2020-03-13 10:31:00', '2020-03-13 10:31:00', 1, 6, '1', '', 0, 0),
-(3, 'Test', '', '', '<p><img src=\"/images/temp/5e77d5c0d575f.png\"></p><p>Test</p>', 'test_2', 2, 4, '2020-03-22 20:48:00', '2020-03-22 20:48:00', 1, 0, '', '', 0, 0),
-(4, 'Test2', '', '', '<p>Test2</p>', 'test2_2', 1, 6, '2020-03-22 21:03:00', '2020-03-22 21:03:00', 1, 0, '', '', 2, 0),
-(5, 'Приватная тема', '', '', '<p>Приватная тема</p>', 'privatnaa_tema', 1, 7, '2020-03-25 13:02:00', '2020-03-25 13:02:00', 1, 1, '', '3', 1, 1);
+(1, 'Тестовая тема', '', '', '<p>Тест</p><p><span style=\"background-color: rgb(247, 150, 70);\">1</span></p><p><span style=\"background-color: rgb(247, 150, 70);\">2</span></p><p><span style=\"background-color: rgb(247, 150, 70);\">3</span></p>', 'testovaa_tema', 2, 4, '2020-03-30 16:50:00', '2020-03-30 16:50:00', 1, 0, '', '', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -209,9 +174,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `image`, `password`, `date_create`, `role`, `about`, `unread_message`) VALUES
-(1, 'Админ', 'admin@mail.ru', 'images/upload/b00005005d3d237be2534e0cfb57e858.png', '5f4dcc3b5aa765d61d8327deb882cf99', '2020-03-16 07:09:18', 5, '<p>Test</p>', ''),
-(2, 'User1', 'user1@mail.ru', '', '5f4dcc3b5aa765d61d8327deb882cf99', '2020-03-22 20:22:40', 2, '', ''),
-(3, 'User2', 'user2@mail.ru', '', '5f4dcc3b5aa765d61d8327deb882cf99', '2020-03-25 12:17:41', 1, '', '');
+(1, 'Администратор', 'admin@mail.ru', 'images/upload/41a1efc983b4f04a310ad300e97138ba.png', '5f4dcc3b5aa765d61d8327deb882cf99', '2020-03-30 16:46:40', 6, '<p>Гарант</p>', ''),
+(2, 'User', 'user@mail.ru', '', '5f4dcc3b5aa765d61d8327deb882cf99', '2020-03-30 16:49:30', 1, '', '');
 
 --
 -- Индексы сохранённых таблиц
@@ -273,31 +237,31 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT для таблицы `comment`
 --
 ALTER TABLE `comment`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `dialog`
 --
 ALTER TABLE `dialog`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT для таблицы `message`
 --
 ALTER TABLE `message`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT для таблицы `page`
 --
 ALTER TABLE `page`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT для таблицы `thread`
 --
 ALTER TABLE `thread`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT для таблицы `users`

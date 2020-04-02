@@ -95,6 +95,6 @@
         </div>
       <?php endif; ?>
     </div>
-    <a href="<?= Url::to(['site/category']) ?>" class="more">Смотреть все</a>
+    <!-- <a href="<?= Url::to(['site/category']) ?>" class="more">Смотреть все</a> -->
   </div>
 </div>

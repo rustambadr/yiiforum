@@ -20,11 +20,9 @@
           'lang' => 'ru',
           'minHeight' => 200,
           'imageUpload' => Url::to(['/thread/image-upload']),
-          'plugins' => [
-              'fontcolor',
-              'fullscreen',
-              'imagemanager',
-          ],
+          'plugins' => array_merge(Yii::$app->functions->editorPlugins(), [
+            'imagemanager',
+            ])
         ],
     ])->label(false) ?>
     <?= $form->field($comment, 'date_create')->widget(DateTimePicker::classname(), [

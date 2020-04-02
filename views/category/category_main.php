@@ -8,7 +8,7 @@
 <div class="category">
   <div class="last-thread">
     <?php foreach ($threads as $key => $thread): ?>
-      <div class="thread">
+      <div class="thread" style="<?= ($thread->color && strlen($thread->color) > 0) ? "background-color: $thread->color;" : '' ?><?= ($thread->color && strlen($thread->color) > 0) ? "color: $thread->color_text;" : '' ?>">
         <a href="<?= Url::to(['thread/index', 'alias' => $thread->alias]) ?>">
           <div class="title">
             <i class="far fa-comments"></i>
@@ -19,7 +19,7 @@
               <p>Сообщений: <?= $thread->comment_count ?></p>
             </div>
             <div class="comment">
-              <p>Последнее от: <?= $thread->getLastComment()->name ?></p>
+              <p>Последнее от: <?= $thread->getLastComment()->owner->name ?></p>
               <p><?= Yii::$app->functions->formatDate($thread->getLastComment()->date_create) ?></p>
             </div>
           <?php endif; ?>

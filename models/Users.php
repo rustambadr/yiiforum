@@ -25,6 +25,7 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     const ROLE_VIP = 3;
     const ROLE_MODERATOR = 4;
     const ROLE_ADMIN = 5;
+    const ROLE_GARANT = 6;
 
     /**
      * {@inheritdoc}
@@ -40,7 +41,7 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     public function rules()
     {
         return [
-            [['name', 'email', 'password', 'date_create', 'role'], 'required'],
+            [['name', 'email', 'date_create', 'role'], 'required'],
             [['date_create', 'about', 'unread_message'], 'safe'],
             [['role'], 'integer'],
             [['name', 'email', 'image'], 'string', 'max' => 256],
@@ -56,7 +57,7 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     {
         return [
             'id' => 'ID',
-            'name' => 'Имя',
+            'name' => 'Логин',
             'email' => 'Email',
             'password' => 'Пароль',
             'image' => 'Фотография',
@@ -76,6 +77,8 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
         $this->file->saveAs($name);
         $this->image = $name;
       }
+      if( strlen($this->password) > 0 )
+        $this->password = md5($this->password);
 
       $this->save( false );
       return true;
@@ -83,6 +86,9 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
     public static function findByEmail($email) {
       return static::findOne(['email' => $email]);
+    }
+    public static function findByLogin($email) {
+      return static::findOne(['name' => $email]);
     }
     public function validatePassword($password) {
         return ($this->password === md5($password));
@@ -112,14 +118,16 @@ class Users extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
     }
     public function getIsAdmin()
     {
-        return ($this->role == Users::ROLE_ADMIN);
+        return ($this->role >= Users::ROLE_ADMIN);
     }
     public function getIsModer()
     {
         return ($this->role >= Users::ROLE_MODERATOR);
     }
     public function getColor() {
-        if( $this->role == Users::ROLE_ADMIN )
+        if( $this->role == Users::ROLE_GARANT )
+          return "#f44336";
+        else if( $this->role == Users::ROLE_ADMIN )
           return "#f44336";
         else if( $this->role == Users::ROLE_ADMIN )
           return "#f44336";

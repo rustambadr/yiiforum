@@ -38,7 +38,7 @@ class Thread extends \yii\db\ActiveRecord
         return [
             [['title', 'content', 'id_owner', 'id_category'], 'required'],
             [['content', 'color', 'color_text'], 'string'],
-            [['id_owner', 'role_view', 'id_category', 'comment_count', 'enable', 'type'], 'integer'],
+            [['id_owner', 'role_view', 'id_category', 'comment_count', 'enable', 'type', 'force'], 'integer'],
             [['date_create', 'date_update', 'allow_comment_ids', 'allow_view_ids'], 'safe'],
             [['title', 'alias'], 'string', 'max' => 256],
             [['alias'], 'unique']
@@ -68,7 +68,7 @@ class Thread extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'title' => 'Заголовок',
-            'content' => 'Контект',
+            'content' => 'Контент',
             'alias' => 'Алиас',
             'id_owner' => 'Автор публикации',
             'id_category' => 'Раздел публикации',
@@ -80,7 +80,8 @@ class Thread extends \yii\db\ActiveRecord
             'color_text' => 'Цвет текста',
             'type' => 'Тип темы',
             'allow_view_ids' => 'Имена пользователей',
-            'enable' => 'Статус темы'
+            'enable' => 'Статус темы',
+            'force' => 'Закрепить'
         ];
     }
 
@@ -90,7 +91,8 @@ class Thread extends \yii\db\ActiveRecord
       $this->date_create = date('Y-m-d H:i', strtotime($this->date_create));
       $this->date_update = date('Y-m-d H:i', strtotime($this->date_create));
       if( !$this->comment_count ) $this->comment_count = 0;
-      if( !$this->type ) $this->type = Users::TYPE_DEFAULT;
+      if( !$this->type ) $this->type = Thread::TYPE_DEFAULT;
+      if( !$this->force ) $this->force = 0;
       if( !$this->allow_comment_ids ) $this->allow_comment_ids = "";
       if( is_array($this->allow_comment_ids) ) $this->allow_comment_ids = implode(',', $this->allow_comment_ids);
       if( !$this->allow_view_ids ) $this->allow_view_ids = "";
@@ -113,9 +115,13 @@ class Thread extends \yii\db\ActiveRecord
     }
     public function getAllowview() {
       $ids = explode(',', $this->allow_view_ids);
-      if( !Yii::$app->user->identity->isAdmin && array_search(Yii::$app->user->id, $ids) === false )
-        return false;
-      return true;
+      if( Yii::$app->user->identity->isAdmin || array_search(Yii::$app->user->id, $ids) !== false )
+        return true;
+
+      if( Yii::$app->user->id == $this->id_owner )
+        return true;
+
+      return false;
     }
     public function getCategory() {
       if( $this->_category == false )
@@ -125,7 +131,7 @@ class Thread extends \yii\db\ActiveRecord
     public function getLastComment() {
       if( $this->_lastComment == false ) {
         $comment = Comment::find()->where(['id_thread' => $this->id])->orderBy(['date_create' => SORT_DESC])->one();
-        $this->_lastComment = $comment->owner;
+        $this->_lastComment = $comment;
       }
       return $this->_lastComment;
     }
@@ -147,11 +153,11 @@ class Thread extends \yii\db\ActiveRecord
         $role = Yii::$app->user->identity->role;
 
       if( is_array($id) )
-        return static::find()->where(['id_category' => $id])->andWhere(['<=', 'role_view', $role])->andWhere(['type' => 0])->orderBy(['date_update' => SORT_DESC]);
+        return static::find()->where(['id_category' => $id])->andWhere(['<=', 'role_view', $role])->andWhere(['type' => 0])->orderBy(['force' => SORT_DESC, 'date_update' => SORT_DESC]);
       else
-        return static::find()->where(['id_category' => $id])->andWhere(['<=', 'role_view', $role])->andWhere(['type' => 0])->orderBy(['date_update' => SORT_DESC]);
+        return static::find()->where(['id_category' => $id])->andWhere(['<=', 'role_view', $role])->andWhere(['type' => 0])->orderBy(['force' => SORT_DESC, 'date_update' => SORT_DESC]);
     }
     public static function getModerationCount() {
-      return static::find()->where(['role_view' => Users::ROLE_ADMIN])->count();
+      return static::find()->where(['role_view' => Users::ROLE_MODERATOR])->count();
     }
 }

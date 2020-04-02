@@ -15,6 +15,12 @@ use yii\db\Query;
 
 class DialogController extends Controller
 {
+  public function beforeAction($action)
+  {
+    if ( !Yii::$app->user->isGuest && Yii::$app->user->identity->role == Users::ROLE_BANNED )
+      throw new \yii\web\NotFoundHttpException("Доступ закрыт");
+    return parent::beforeAction($action);
+  }
     public function actionIndex()
     {
       if( Yii::$app->user->isGuest )
@@ -172,10 +178,13 @@ class DialogController extends Controller
 
       $myID = Yii::$app->user->id;
       $dialog = Dialog::find()->where(['id' => $id])->andWhere("`user_ids`->'$.u$myID'")->one();
-      if(!$dialog || $dialog->getHasadmin())
+      if(!$dialog)
         throw new \yii\web\NotFoundHttpException("Доступ закрыт");
 
-      $admins = Users::find()->where(['role' => Users::ROLE_ADMIN])->all();
+      if($dialog->getHasadmin())
+        throw new \yii\web\NotFoundHttpException("Администратор уже приглашен в чат");
+
+      $admins = Users::find()->where(['role' => Users::ROLE_GARANT])->all();
       $user_ids = json_decode($dialog->user_ids, true);
       foreach ($admins as $key => $admin) {
         $id = $admin->id;

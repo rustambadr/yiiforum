@@ -5,25 +5,38 @@ body {
     margin-top: 25px;
   }
   header {
-    height: 200px;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-
-    .container {
-      padding: 25px 0;
-      display: flex;
-      // border-bottom: solid 1px $borderColor;
-      .logo {
-        margin: auto;
-      }
+    // height: 200px;
+    // background-position: center;
+    // background-size: contain;
+    // background-repeat: no-repeat;
+    img {
+      width: 100%;
     }
+    .size2,.size3,.size4 {
+      display: none;
+    }
+    // .container {
+    //   padding: 25px 0;
+    //   display: flex;
+    //   // border-bottom: solid 1px $borderColor;
+    //   .logo {
+    //     margin: auto;
+    //   }
+    // }
   }
   section#app {
     padding: 25px 0;
     min-height: calc(100vh - 250px);
     .container {
       display: flex;
+      .not-login {
+        padding: 20px;
+        text-align: center;
+        a {
+          color: black;
+          text-decoration: underline;
+        }
+      }
       .dialog-box {
         .inbox_msg {
         	border: 1px solid #ddd;
@@ -165,12 +178,14 @@ body {
         	width: 92%;
         }
 
-        .received_withd_msg p.text {
+        .received_withd_msg div.text {
+          p {
+            color: #646464;
+          	font-size: 14px;
+          	margin: 0;
+          }
         	background: #ebebeb none repeat scroll 0 0;
         	border-radius: 0 15px 15px 15px;
-        	color: #646464;
-        	font-size: 14px;
-        	margin: 0;
         	padding: 5px 10px 5px 12px;
         	width: 100%;
         }
@@ -188,7 +203,7 @@ body {
 
         .mesgs{
         	padding: 15px;
-          p.name {
+          a.name {
             margin-bottom: 0;
             color: #747474;
             display: block;
@@ -198,7 +213,12 @@ body {
         }
 
         .sent_msg {
-          p.text {
+          div.text {
+            p {
+              font-size: 14px;
+            	margin: 0;
+            	color: #fff;
+            }
           	background:#0465ac;
       	    border-radius: 12px 0px 15px 12px;
           	font-size: 14px;
@@ -326,20 +346,21 @@ body {
         .bot-category {
           .category {
             // box-shadow: -18px -17px 21px -19px rgba(0, 0, 0, 0.3);
-            // border: 1px solid black;
-            // padding: 5px;
+            border: 1px solid black;
+            padding: 5px;
           }
         }
         .top-category {
           .category {
             margin: auto;
+            margin-bottom: 5px;
             border-radius: 3px;
             .image {
-              height: 200px;
+              height: 120px;
               display: flex;
               overflow: hidden;
               background-position: center;
-              background-size: cover;
+              background-size: contain;
               background-repeat: no-repeat;
             }
             p {
@@ -350,13 +371,14 @@ body {
         .bot-category {
           .category {
             margin: auto;
+            margin-bottom: 5px;
             border-radius: 3px;
             .image {
               height: 120px;
               display: flex;
               overflow: hidden;
               background-position: center;
-              background-size: cover;
+              background-size: contain;
               background-repeat: no-repeat;
             }
             p {
@@ -372,6 +394,7 @@ body {
             border-radius: 10px;
             height: 58px;
             display: flex;
+            margin-bottom: 10px;
             a {
               width: 100%;
               margin: auto 0;
@@ -653,6 +676,9 @@ body {
       border-top: solid 1px $borderColor;
       display: flex;
       justify-content: space-between;
+      .row {
+        width: 100%;
+      }
       p {
         margin-bottom: 0;
         height: 25px;

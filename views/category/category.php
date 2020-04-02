@@ -8,7 +8,7 @@
 <div class="category">
   <?php if (Yii::$app->user->isGuest == false && Yii::$app->user->identity->isAdmin): ?>
     <div class="form-group">
-      <a href="<?= Url::to(['category/edit', 'id' => $category->id]) ?>" class="btn btn-primary">Редиктировать раздел</a>
+      <a href="<?= Url::to(['category/edit', 'id' => $category->id]) ?>" class="btn btn-primary">Редактировать раздел</a>
       <a href="<?= Url::to(['category/delete', 'id' => $category->id]) ?>" class="btn btn-danger">Удалить раздел</a>
     </div>
   <?php endif; ?>
@@ -32,7 +32,7 @@
               <p>Сообщений: <?= $thread->comment_count ?></p>
             </div>
             <div class="comment">
-              <p>Последнее от: <?= $thread->getLastComment()->name ?></p>
+              <p>Последнее от: <?= $thread->getLastComment()->owner->name ?></p>
               <p><?= Yii::$app->functions->formatDate($thread->getLastComment()->date_create) ?></p>
             </div>
           <?php endif; ?>

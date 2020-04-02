@@ -72,7 +72,7 @@ class Category extends \yii\db\ActiveRecord
             'parent_id' => 'Родительская категория',
             'alias' => 'Алиас',
             'title' => 'Заголовок',
-            'content' => 'Контект',
+            'content' => 'Контент',
             'image' => 'Изображение',
             'date_create' => 'Дата создания',
             'role_view' => 'Видно всем',

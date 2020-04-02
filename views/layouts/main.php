@@ -26,12 +26,19 @@ AppAsset::register($this);
 </head>
 <body>
 <?php $this->beginBody() ?>
-<header style="background-image: url(https://placehold.it/1440x500);" onclick="window.location.href = '/';">
-  <div class="container">
-    <div class="logo d-none">
-      <a href="<?= Url::to(['site/index']) ?>"><img src="https://placehold.it/400x100" alt=""></a>
+<header>
+    <div class="size1">
+      <a href="<?= Url::to(['site/index']) ?>"><img class="lazy" data-original="https://placehold.it/1900x250" alt="" style="min-height: 200px;"></a>
     </div>
-  </div>
+    <div class="size2">
+      <a href="<?= Url::to(['site/index']) ?>"><img class="lazy" data-original="https://placehold.it/1440x250" alt="" style="min-height: 200px;"></a>
+    </div>
+    <div class="size3">
+      <a href="<?= Url::to(['site/index']) ?>"><img class="lazy" data-original="https://placehold.it/768x250" alt="" style="min-height: 200px;"></a>
+    </div>
+    <div class="size4">
+      <a href="<?= Url::to(['site/index']) ?>"><img class="lazy" data-original="https://placehold.it/425x250" alt="" style="min-height: 200px;"></a>
+    </div>
 </header>
 <section id="app">
     <div class="container main-container">
@@ -46,7 +53,7 @@ AppAsset::register($this);
           <hr>
           <?= OnlineBlock::widget() ?>
           <hr>
-          <a href="#"><img src="https://placehold.it/200x300" alt=""></a>
+          <a href="#" class="d-table"><img src="https://placehold.it/200x300" alt=""></a>
         </div>
       </div>
       <div class="content">
@@ -60,9 +67,18 @@ AppAsset::register($this);
 </section>
 
 <footer class="footer">
-    <div class="container">
-        <p>&copy; My Company <?= date('Y') ?></p>
-        <p><?= Yii::powered() ?></p>
+    <div class="container p-4">
+      <div class="row">
+        <div class="col">
+          <p>&copy; Forum <?= date('Y') ?></p>
+        </div>
+        <div class="col">
+          <a href="#">Политика конфиденциальности</a>
+        </div>
+        <div class="col">
+          <a href="#">Помощь</a>
+        </div>
+      </div>
     </div>
 </footer>
 

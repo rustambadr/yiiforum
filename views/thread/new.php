@@ -37,31 +37,29 @@
           'lang' => 'ru',
           'minHeight' => 200,
           'imageUpload' => Url::to(['/thread/image-upload']),
-          'plugins' => [
-              'fontcolor',
-              'fullscreen',
-              'imagemanager',
-          ],
+          'plugins' => array_merge(Yii::$app->functions->editorPlugins(), [
+            'imagemanager',
+            ])
         ],
     ]) ?>
-    <?= $form->field($model, 'color')->widget(ColorInput::classname(), [
-        'value' => 'rgba(255, 255, 255, 255)',
-        'options' => ['placeholder' => 'Select color ...'],
-        'pluginOptions' => [
-            'showInput' => false,
-            'preferredFormat' => 'rgba'
-        ]
-    ]) ?>
-    <?= $form->field($model, 'color_text')->widget(ColorInput::classname(), [
-        'value' => 'rgba(0, 0, 0, 255)',
-        'options' => ['placeholder' => 'Select color ...'],
-        'pluginOptions' => [
-            'showInput' => false,
-            'preferredFormat' => 'rgba'
-        ]
-    ]) ?>
-
-
+    <?php if (Yii::$app->user->identity->isAdmin): ?>
+      <?= $form->field($model, 'color')->widget(ColorInput::classname(), [
+          'value' => 'rgba(255, 255, 255, 255)',
+          'options' => ['placeholder' => 'Select color ...'],
+          'pluginOptions' => [
+              'showInput' => false,
+              'preferredFormat' => 'rgba'
+          ]
+      ]) ?>
+      <?= $form->field($model, 'color_text')->widget(ColorInput::classname(), [
+          'value' => 'rgba(0, 0, 0, 255)',
+          'options' => ['placeholder' => 'Select color ...'],
+          'pluginOptions' => [
+              'showInput' => false,
+              'preferredFormat' => 'rgba'
+          ]
+      ]) ?>
+    <?php endif; ?>
 
     <?= $form->field($model, 'id_category')->dropDownList(ArrayHelper::map(Category::find()->all(),'id','title'),[
         'prompt' => 'Выберите категорию'
@@ -131,6 +129,12 @@
       <?= $form->field($model, 'enable')->dropDownList([
         '1' => 'Активна',
         '2' => 'Закрыта',
+      ],[
+          'prompt' => 'Выберите статус...'
+      ]) ?>
+      <?= $form->field($model, 'force')->dropDownList([
+        '0' => 'Открепить',
+        '1' => 'Закрепить',
       ],[
           'prompt' => 'Выберите статус...'
       ]) ?>

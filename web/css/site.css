@@ -2,20 +2,12 @@ body .pagination {
   margin-top: 25px;
 }
 
-body header {
-  height: 200px;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
+body header img {
+  width: 100%;
 }
 
-body header .container {
-  padding: 25px 0;
-  display: flex;
-}
-
-body header .container .logo {
-  margin: auto;
+body header .size2, body header .size3, body header .size4 {
+  display: none;
 }
 
 body section#app {
@@ -25,6 +17,16 @@ body section#app {
 
 body section#app .container {
   display: flex;
+}
+
+body section#app .container .not-login {
+  padding: 20px;
+  text-align: center;
+}
+
+body section#app .container .not-login a {
+  color: black;
+  text-decoration: underline;
 }
 
 body section#app .container .dialog-box .inbox_msg {
@@ -170,14 +172,17 @@ body section#app .container .dialog-box .received_msg {
   width: 92%;
 }
 
-body section#app .container .dialog-box .received_withd_msg p.text {
+body section#app .container .dialog-box .received_withd_msg div.text {
   background: #ebebeb none repeat scroll 0 0;
   border-radius: 0 15px 15px 15px;
+  padding: 5px 10px 5px 12px;
+  width: 100%;
+}
+
+body section#app .container .dialog-box .received_withd_msg div.text p {
   color: #646464;
   font-size: 14px;
   margin: 0;
-  padding: 5px 10px 5px 12px;
-  width: 100%;
 }
 
 body section#app .container .dialog-box .time_date {
@@ -195,7 +200,7 @@ body section#app .container .dialog-box .mesgs {
   padding: 15px;
 }
 
-body section#app .container .dialog-box .mesgs p.name {
+body section#app .container .dialog-box .mesgs a.name {
   margin-bottom: 0;
   color: #747474;
   display: block;
@@ -203,7 +208,7 @@ body section#app .container .dialog-box .mesgs p.name {
   font-weight: bold;
 }
 
-body section#app .container .dialog-box .sent_msg p.text {
+body section#app .container .dialog-box .sent_msg div.text {
   background: #0465ac;
   border-radius: 12px 0px 15px 12px;
   font-size: 14px;
@@ -211,6 +216,12 @@ body section#app .container .dialog-box .sent_msg p.text {
   color: #fff;
   padding: 5px 10px 5px 12px;
   width: 100%;
+}
+
+body section#app .container .dialog-box .sent_msg div.text p {
+  font-size: 14px;
+  margin: 0;
+  color: #fff;
 }
 
 body section#app .container .dialog-box .sent_msg .name {
@@ -337,17 +348,23 @@ body section#app .container .content .top-category .category {
   padding: 5px;
 }
 
+body section#app .container .content .bot-category .category {
+  border: 1px solid black;
+  padding: 5px;
+}
+
 body section#app .container .content .top-category .category {
   margin: auto;
+  margin-bottom: 5px;
   border-radius: 3px;
 }
 
 body section#app .container .content .top-category .category .image {
-  height: 200px;
+  height: 120px;
   display: flex;
   overflow: hidden;
   background-position: center;
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;
 }
 
@@ -357,6 +374,7 @@ body section#app .container .content .top-category .category p {
 
 body section#app .container .content .bot-category .category {
   margin: auto;
+  margin-bottom: 5px;
   border-radius: 3px;
 }
 
@@ -365,7 +383,7 @@ body section#app .container .content .bot-category .category .image {
   display: flex;
   overflow: hidden;
   background-position: center;
-  background-size: cover;
+  background-size: contain;
   background-repeat: no-repeat;
 }
 
@@ -383,6 +401,7 @@ body section#app .container .content .last-thread .thread {
   border-radius: 10px;
   height: 58px;
   display: flex;
+  margin-bottom: 10px;
 }
 
 body section#app .container .content .last-thread .thread a {
@@ -689,6 +708,10 @@ body footer .container {
   border-top: solid 1px rgba(158, 158, 158, 0.5);
   display: flex;
   justify-content: space-between;
+}
+
+body footer .container .row {
+  width: 100%;
 }
 
 body footer .container p {

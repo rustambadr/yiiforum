@@ -45,4 +45,12 @@ class Functions extends Component {
 
       file_put_contents($_SERVER['DOCUMENT_ROOT'] . '/config/params.php', '<?php return ' . var_export($config, true) . ';');
     }
+    public function editorPlugins() {
+      // if( Yii::$app->user->isGuest == false && Yii::$app->user->identity->isAdmin )
+        return [
+          'fontcolor',
+          'fullscreen',
+        ];
+      // return [];
+    }
 }

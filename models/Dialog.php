@@ -76,6 +76,8 @@ class Dialog extends \yii\db\ActiveRecord
           $u->save( false );
         }
       }
+      $this->date_update = date('Y-m-d H:i:s');
+      $this->save( false );
     }
     public function getHasadmin() {
       $users = json_decode($this->user_ids, true);

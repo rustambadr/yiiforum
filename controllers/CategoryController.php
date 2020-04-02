@@ -14,6 +14,12 @@ use yii\data\Pagination;
 
 class CategoryController extends Controller
 {
+  public function beforeAction($action)
+  {
+    if ( !Yii::$app->user->isGuest && Yii::$app->user->identity->role == Users::ROLE_BANNED )
+      throw new \yii\web\NotFoundHttpException("Доступ закрыт");
+    return parent::beforeAction($action);
+  }
     public function actionMain()
     {
       $categorys = Category::findByAlias(['belye_uslugi', 'serye_uslugi', 'cernye_uslugi']);

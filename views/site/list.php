@@ -22,7 +22,7 @@
               <p>Сообщений: <?= $thread->comment_count ?></p>
             </div>
             <div class="comment">
-              <p>Последнее от: <?= $thread->getLastComment()->name ?></p>
+              <p>Последнее от: <?= $thread->getLastComment()->owner->name ?></p>
               <p><?= Yii::$app->functions->formatDate($thread->getLastComment()->date_create) ?></p>
             </div>
           <?php endif; ?>
